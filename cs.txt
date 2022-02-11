@@ -1,0 +1,386 @@
+2013 12th International Conference on Machine Learning and Applications
+
+
+
+
+
+
+
+Using Support Vector Machines to Classify Student Attentiveness for the Development of Personalized 
+Learning Systems
+
+Manus Ross, Corey A. Graves, John W. Campbell, Jung H. Kim
+Department  of Electrical and Computer Engineering North Carolina A&T State University
+Greensboro, NC, USA
+E-mail:  rnross@aggies.ncat.edu, cag@ncat.edu,  jwcampbe@ncat.edu, kim@ncat.edu
+
+
+
+Abstract—There have been many studies in which researchers have  attempted  to  classify  student  
+attentiveness.  Many  of  these approaches  depended  on  a  qualitative  analysis  and  lacked  
+any quantitative analysis. Therefore, this work is focused  on bridging the   gap   between   
+qualitative   and   quantitative   approaches   to classify    student    attentiveness.   Thus,    
+this    research    applies machine     learning     algorithms     (K-means     and     SVM)     
+to automatically  classify  students  as  attentive  or  inattentive  using data  from  a  consumer 
+ RGB-D  sensor.  Results  of  this  research can  be  used  to  improve  teaching  strategies  for  
+instructors  at all levels   and   can   aid   instructors   in   implementing   personalized 
+learning  systems,  which  is  a  National  Academy  of  Engineering Grand   Challenge.    This   
+research   applies   machine    learning algorithms  to an educational  setting. Data from these 
+algorithms can  be  used  by  instructors  to  provide  valuable  feedback  on  the effectiveness   
+of  their   instructional   strategies   and   pedagogies. Instructors  can use  this  feedback  to 
+ improve  their  instructional strategies;   and   students   will   benefit   by   achieving   
+improved learning  and  subject  mastery.  Ultimately,  this  will  result  in  the students'  
+increased  ability  to  do  work  in  their  respective  areas. Broadly,  this  work  can  help  
+advance  efforts  in  many  areas  of education    and    instruction.    It   is   expected    
+that    improving instructional  strategies  and  implementing  personalized  learning will  help 
+create  more  competent,  capable,  and prepared  persons available for the future workforce.
+
+Keywords—    Support    vector    machines,    K-meons,    Kinect, personalized learning systems
+
+I.       INTRODUCTION
+Many   studies   have   been   performed   to   determine   the attentiveness  of  students  in  an 
+ instructional  setting.   Many  of these  studies  relied  on  qualitative     techniques  rather  
+than  a quantitative      approach      to      identifying      and      measuring attentiveness   
+ [1],    [2],    [3].    Some    researchers    have    also investigated   quantitative   
+approaches   to   monitoring   student attentiveness. Biometric  bracelets  are  being  
+investigated  as  an
+indicator   of   student   attentiveness   [4].   Eye   and   head   pose tracking  have also been 
+used to determine student attentiveness [5].   Facial   expressions    have   been   used   to   
+infer   student attentiveness  for computer network courses [6].
+Classifying   students   as   attentive   or   inattentive   can   be helpful  to  the  instructor  
+by  providing   feedback  as  to  which teaching  style  a particular  student  responds  most  
+favorably  to. There  are  four  learning  orientations  a  learner  will  likely  fall into:  an  
+innovator;  an  implementer;  a  sustainer;  or  a  resistant learner    [7].    If  an  instructor 
+ is  able  to  classify  a  student  as attentive   or  inattentive   when   the  student   is  
+exposed  to  the associated   teaching    styles   of   each   of   these   orientations, students  
+can  be  separated  into  course  sections  that  implement their  optimal  learning  style  or  
+can  be assigned  online  teaching modules  that  use  the  teaching  style  a  particular  student 
+ will perform optimally with.
+Researchers     have     developed     personalized     e-learning systems   based   on  Genetic   
+algorithms   (GA)   and  case-based reasoning  (CBR)  [8].  Adaptive  user  interfaces  have  also  
+been developed     based    on    personalized     learning     [9].    These approaches   focus  
+on  online  learning  settings.   The  proposed system  in  this  research  can  be  applied  to  
+online  as  well  as classroom instructional settings.
+This   article   describes   a  system  that   uses   a  commercial RGB-D  camera  to monitor,  
+count, and record  student  gestures, postures,   facial   expressions,   and   verbalizations   in 
+ order   to produce  data  for  determining  student  attentiveness.  Machine learning  algorithms  
+are  then used to cluster,  label,  and  classify the  data  for  the  purpose  of  classifying  
+subsequent  students  as attentive   or  inattentive.     This  system   is  an   imperative  step 
+towards  developing  the proposed  personalized  learning  system described  in this article.
+
+II.      METHODOLOGY
+
+
+978-0-7695-5144-9/13 $31.00 S  2013 IEEE DOI 10.1109/ICMLA.2013.66
+325
+IEEE
+% computer
+society
+
+Authorized  licensed use limited to: University of Ottawa. Downloaded  on December 03,2021 at 
+09:51:44 UTC from IEEE Xplore.  Restrictions apply.
+
+
+
+
+
+
+
+RGB-O Sensor
+
+
+
+
+Behavior-detecting
+
+
+
+
+
+
+
+
+
+
+
+
+Figure  1    illustrates  the  system  proposed  in  this  article. First, an RGB-D sensor is used 
+to observe a single student.  An algorithm  that  is  running  in  real time then  detects  and  
+counts various  behaviors  that  indicate  attentiveness.  These  data  for this student  are 
+stored  into a database.  When  every student  in the  study  has  been  observed,  the  data  from 
+ the  database  are clustered  into  two  groups  using  the  K-means  algorithm  [10]. After  the  
+data  are  clustered  and  then  labeled  as  attentive  or inattentive, the SVM algorithm [11] is 
+used to create a decision boundary for the two groups of data.
+
+A.  RGB-D Sensor
+In this  system,  an  RGB-D  sensor  would  be  used  to detect various  student  behaviors.  We  
+propose  the  use  of  a  Kinect sensor [12] since it is a relatively  inexpensive  consumer  RGB- 
+D sensor with many capabilities  built  into  its official  software development  kit  (SDK).  An  
+example  of  a  Kinect  application used  for this  purpose  is shown  in  Figure  2. An algorithm  
+that detects,  counts,  and  records  the  number  of  times  a  student raises  his  or  her  hand 
+ was developed  using  the  Kinect  sensor and its associated SDK.
+
+B.  Behavior-detecting Algorithm
+There are various behaviors that indicate attentiveness ; and many  of  these  can  be  
+automatically  observed  and  recorded using  an  RGB-D  camera.  Some  examples  of  these  types  
+of behaviors are: leaning forward [13]; speaking to the instructor; hand raising; eyebrow raising / 
+lowering [14].
+
+C.  Database
+The   data  of  each   student   are   saved   into   the  database separately;  since  each  RGB-D 
+ sensor  is  used  for one  student. After  each student  is observed  and  the instructional  
+session  is over,  the  data  are  recorded  into  a  new  row  inside  of  the database. The 
+number of occurrences of each feature (e.g. hand raising or leaning  forward)  is stored into a 
+different  column of that row.
+
+D.  Data Clustering
+When  every  student  in  the  study  has  been  observed,  the data   are   clustered   into   two 
+  clusters   using   the   K-means algorithm.   The  clusters  of  data  are  labeled   as  
+attentive  or inattentive  depending  on  the  distance  from  the  origin  of  the data; the 
+cluster  with a centroid  closest to the origin is labeled
+
+inattentive  and  the  other  cluster  is  labeled  attentive.  This  is done  since  all of the 
+recorded  data indicate  attentive  behavior and  a  lack  of  these  behaviors  results  in  the  
+centroid  of  that cluster being closer to the origin of the dataset.
+
+E.  Classification Algoritm
+Since  the  clusters  are  now  labeled,  a  supervised  learning algorithm  can  be  used  to  
+create  a  decision  boundary.  In  this work,  we  used  the  support  vector  machine  (SVM)  
+algorithm. Six of the data points were used for training and the remaining fourteen were used for 
+testing.
+
+III.      EXPERIMENTS
+
+A.  Data Generation
+The  data  used  in  this  analysis  were  created  by  randomly generating  data  within  a  fixed 
+ range  of  values  (from  zero  to twelve); these values represented the number of times a student 
+was observed  exhibiting  a specific  attentiveness  behavior.  For illustration purposes, each 
+hypothetical student  was given only two  features  (attentiveness  behavior)  each:  number  of  
+hand raises;  and  number  of  times  eyebrows  were  raised.  Figure  3 depicts  the  generated  
+data.  Each  of  the  points  in  the  figure represent   a  separate   student.   Twenty   
+hypothetical   students were used in this study.
+
+B.  K-means Algorithm
+The   K-means   algorithm   was  used   to  cluster   the  data. Algorithm 1 illustrates the basic 
+procedure of the algorithm.  In this  research,  the  algorithm  converged  in  four  iterations  
+as illustrated in Figure 4.
+
+C.  Support Vector Machine Algorithm
+After  the  data  were  clustered  and  labeled  using  the  K- means   algorithm,    they   were   
+classified    using   the   SVM algorithm.   Algorithm  2  illustrates  the  basic  algorithm.   
+The variable  B represents  the parameters  and /  is chosen  based on the type  of  kernel  
+function  used.  In this  research,  a Gaussian Kernel was chosen.
+
+
+
+326
+
+
+Authorized  licensed use limited to: University of Ottawa. Downloaded  on December 03,2021 at 
+09:51:44 UTC from IEEE Xplore.  Restrictions apply
+
+
+
+
+
+Observations of 20 different students (simub1ed)
+
+
+
+
+
+
+
+
+
+
+
+
+
+O              O
+
+The generated data was then clustered  into two groups and labeled as attentive or inattentive. 
+These labeled data were then used  as  training  and  testing  data  in  a  supervised   learning
+°                             algorithm   (SVM)   to   establish   a   decision   boundary.   This 
+decision  boundary  can  then  be  used  to  automatically  classify subsequent  students as 
+attentive or inattentive.
+In this research we only used two features, but this concept can  be  extended  to  many  
+additional  features.  The  data  were limited in this article for illustration purposes.
+The  results  from the  system  can  be  used  to  determine  the learning  style  of  a  
+particular  student.  An  instructor  can teach similar  material with various teaching  styles and 
+ record  which particular student reacts best to a given style. When the optimal
+
+Figure 3: Plot of simulated student behaviors
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 4: Result of K-means clustering
+teaching  style  is  found  for a specific  student,  that  student  can be placed  in  an  
+instructional  setting  that  exclusively  uses  that style.   This   would   provide   the   
+student   with   personalized learning  and  could  increase  the  likelihood   of  the  student's 
+classroom success.
+
+
+Algorithm  1  K-means  Algorithm
+ltarir1‹irnly  iriitialixc  K cluster  ccnli ‹rids:
+
+
+‹- ’  :— ini lex  (fi ‹rim 1 tr› K) ‹if i!luster  t!entrr›ii1
+
+
+uk :—  average (mean) uf points  assigned  to
+cluster k
+
+note: m is number of samples
+
+IV.      RESULTS
+The  data  were clustered  using  the  K-means  algorithm  and                                      
+                                                                         
+
+classified  using  the  SVM  algorithm.  Figure  5  illustrates  the final classification and the 
+associated decision boundary for the group of hypothetical students.
+From these  results,  students  who  were  not  included  in the initial training or testing set 
+can be observed and automatically classified as attentive or inattentive based on the clustering 
+and classification of the  students  in a given study.  In a real-world application of this system, 
+ more  students would  be considered and  the  researcher  would  need  to  ensure  that  the  
+students  are representative  of  the  demographic  of  students  he  or  she  is attempting to 
+automatically classify [15].
+
+V.      CONCLUSION
+This  research  lays  the  groundwork  for  building  a  system that   can   automatically   
+classify   a   student   as   attentive   or inattentive  in an  instructional  setting.  In this  
+study,  data were generated that represented  students' number of hand raises and number  of  
+eyebrow  raises  during  an  instructional  session.  It was   proposed   that   this   data   
+should   be   collected   using   a commercial RGB-D camera such as the Kinect sensor.
+Algorithm  2 SVM  Algorithm
+Predicted Value
+Predict “y=1“  if 6^/        0
+
+
+Training
+
+
+•    f is a feature vector which is found  by choosing a kernel function
+•    we use a Gaussian  Kerne I for which!-
+
+
+
+327
+
+
+Authorized  licensed  use limited  to: University of Ottawa.  Downloaded  on  December 03,2021 at 
+09:51:44  UTC from  IEEE Xplore.   Restrictions apply
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 5: Result of applying SVM to labeled data
+
+
+ACKNOWLEDGMENT
+•      Title III HBGI Program
+
+REFERENCES
+
+V.   Snider,   “Use   of  self-monitoring   of   attention   with   ld   students:         ' 
+Research  and  application,”  Learning  Disability Quarterly,  pp.  139-151,  1987.
+[2]    E. E. McDowell et al., “A multivariate study of teacher immediacy, teaching effectiveness, 
+and student attentiveness at the junior high and senior high levels.,” 1980.
+[3]    R. P. Grobe and T. J. Pettibone, “Effect of instructional pace on student attentiveness,” 
+The Journal of Educational Research, pp. 131-134, 1975.
+[4]    S.     Simon,     “Biosensors     to     monitor     students     attentiveness..” Retrieved 
+           June            5,                        2012,                         from 
+http://www.reuters.com/article/2012/06/13/,  June 2012.
+[5]    S. Asteriadis, P. Tzouveli, K. Karpouzis, and S. Kollias, “Estimation  of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+328
+
+behavioral user state based on eye gaze and head pose-application in an e-learning environment,” 
+Multimedia Tools and Applications,  vol. 41, no. 3, pp. 469fi93, 2009.
+[6]    H.-R.   Chen,   “Assessment   of   learners'   attention   to   e-learning   by monitoring 
+facial expressions  for computer network courses,” Journal of
+Educational Computing Research, vol. 47, no. 4, pp. 371-385, 2012.
+[7]    M.  Martinez,  “What  is  personalized  learning?  are  we  there  yet,”  E- Learning 
+Developer's Journal, 2002.
+[8]    M.-J.   Huang,    H.-S.    Huang,   and   M.-Y.    Chen,   “Constructing    a personalized  
+e-learning  system  based  on  genetic  algorithm  and  case- based  reasoning  approach,”  Expert  
+Systems  with  Applications,  vol. 33, no. 3, pp. 551—564, 2007.
+[9]    J. Liu, C. K  Wong, and K. K. Hui, “An adaptive user interface based on personalized 
+learning,” Intelligent Systems, IEEE, vol. 18, no. 2, pp. 52— 57, 2003.
+[10]  J.   MacQueen,   “Some   methods   for   classification   and   analysis   of multivariate  
+observations,” in Proceedings  of 5th Berkeley  Symposium on Mathematical Statistics and 
+Probability., pp. 281—297, University of
+California Press., 1967.
+[t  j]  C.   Cortes    and   V.   Vapnik,    “Support-vector   networks,”    Machine Learning, vol. 
+20, no. 3, pp. 273-297, 1995.
+[12]  “Kinect           for           Windows.”           http://www.microsoft.com/en- 
+us/kinectforwindows/,  2013.
+A.   Guye-Vuilleme,   T.   Capin,   S.   Pandzic,   N.   Thalmann,   and   D. Thalmann, “Nonverbal 
+communication  interface for collaborative virtual
+environments,” Virtual Reality, vol. 4, no. 1, pp. 49—59, 1999.
+[14]  H.  Wagner,   C.  MacDonald,   and  A.  Manstead,   “Communication  of individual emotions by 
+spontaneous  facial expressions,” Journal of
+Personality and Social Psychology,  vol. 50(4), pp. 737—743, 1986.
+[15]  G. Gan, C. Ma, and J. Wu, Data Clustering: Theory, Algorithms, and Applications (ASA-SIAM  
+Series on Statistics and Applied Probability). Society for Industrial and Applied Mathematics, 
+2007.
+
+
+Authorized licensed use limited to: University of Ottawa. Downloaded on December 03,2021 at 
+09:51:44 UTC from IEEE Xplore.  Restrictions apply.
